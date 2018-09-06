@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mGuideText;
     private TextView mResultText;
     private double mTimerSec = 0.0;
-    private AdView mAdView;
+    //private AdView mAdView;
 
     private Handler mHandler = new Handler();
 
@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // AdMobの初期化
-        MobileAds.initialize(this, "ca-app-pub-7517861216605994~5209715764");
-        mAdView = findViewById(R.id.adView);
+        //MobileAds.initialize(this, "ca-app-pub-7517861216605994~5209715764");
+        AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 

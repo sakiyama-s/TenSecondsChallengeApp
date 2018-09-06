@@ -15,8 +15,8 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
 
         <!-- AdMobに必要なメタデータを設定する -->
-        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7517861216605994~5209715764" />
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -27,8 +27,7 @@
         </activity>
 
         <activity android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:theme="@android:style/Theme.Translucent" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
     </application>
 
 </manifest>
