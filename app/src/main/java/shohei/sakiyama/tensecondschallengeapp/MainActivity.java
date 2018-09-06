@@ -10,24 +10,41 @@ import android.widget.TextView;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 public class MainActivity extends AppCompatActivity {
 
-    Timer mTimer;
-    TextView mTimerText;
-    TextView mGuideText;
-    TextView mResultText;
-    double mTimerSec = 0.0;
+    private Timer mTimer;
+    private TextView mTimerText;
+    private TextView mGuideText;
+    private TextView mResultText;
+    private double mTimerSec = 0.0;
+    private AdView mAdView;
 
+    private Handler mHandler = new Handler();
 
-    Handler mHandler = new Handler();
-
-    Button mChallengeButton;
+    private Button mChallengeButton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // AdMobの初期化
+        MobileAds.initialize(this, "ca-app-pub-7517861216605994~5209715764");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-7517861216605994/8603548759");
+        adView.setVisibility(View.VISIBLE);
 
         mTimerText = (TextView) findViewById(R.id.timer);
         mResultText = (TextView) findViewById(R.id.result);
@@ -69,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
                     mTimerText.setText(String.format("%.1f",mTimerSec));
 
 
+
+
+
                     // 10秒ちょうどだったらおめでとう
                     if( String.format("%.1f",mTimerSec).equals("10.0")){
                         mResultText.setText("すごい！　おめでとう！");
@@ -87,6 +107,35 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+//        mAdView.setAdListener(new AdListener(){
+//            @Override
+//            public void onAdLoaded() {
+//                // Code to be executed when an ad finishes loading.
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(int errorCode) {
+//                // Code to be executed when an ad request fails.
+//            }
+//
+//            @Override
+//            public void onAdOpened() {
+//                // Code to be executed when an ad opens an overlay that
+//                // covers the screen.
+//            }
+//
+//            @Override
+//            public void onAdLeftApplication() {
+//                // Code to be executed when the user has left the app.
+//            }
+//
+//            @Override
+//            public void onAdClosed() {
+//                // Code to be executed when when the user is about to return
+//                // to the app after tapping on an ad.
+//            }
+//        });
 
 
     }
