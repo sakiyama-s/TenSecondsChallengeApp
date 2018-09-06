@@ -36,16 +36,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        MobileAds.initialize(this, getString(R.string.adAppId) );
+
         // AdMobの初期化
         //MobileAds.initialize(this, "ca-app-pub-7517861216605994~5209715764");
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        //AdView adView = findViewById(R.id.adView);
-        //mAdView.setAdSize(AdSize.BANNER);
-        //mAdView.setAdUnitId("ca-app-pub-7517861216605994/8603548759");
-        //mAdView.setVisibility(View.VISIBLE);
+//        AdView adView = new AdView(this);
+//        adView.setAdSize(AdSize.BANNER);
+//        adView.setAdUnitId(getString(R.string.adUnitId));
+
 
         mTimerText = (TextView) findViewById(R.id.timer);
         mResultText = (TextView) findViewById(R.id.result);
@@ -103,34 +105,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        AdView adView = findViewById(R.id.adView);
-
-        adView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                Log.d("Debug", "onAdLoaded()");
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                Log.d("Debug", "onAdFailedToLoad() errorCode=" + errorCode);
-            }
-
-            @Override
-            public void onAdOpened() {
-                Log.d("Debug", "onAdOpened()");
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                Log.d("Debug", "onAdLeftApplication()");
-            }
-
-            @Override
-            public void onAdClosed() {
-                Log.d("Debug", "onAdClosed()");
-            }
-        });
+//        AdView adView = findViewById(R.id.adView);
+//
+//        adView.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                Log.d("Debug", "onAdLoaded()");
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(int errorCode) {
+//                Log.d("Debug", "onAdFailedToLoad() errorCode=" + errorCode);
+//            }
+//
+//            @Override
+//            public void onAdOpened() {
+//                Log.d("Debug", "onAdOpened()");
+//            }
+//
+//            @Override
+//            public void onAdLeftApplication() {
+//                Log.d("Debug", "onAdLeftApplication()");
+//            }
+//
+//            @Override
+//            public void onAdClosed() {
+//                Log.d("Debug", "onAdClosed()");
+//            }
+//        });
 
 
     }
