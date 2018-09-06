@@ -36,14 +36,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        MobileAds.initialize(this, getString(R.string.adAppId) );
+        //MobileAds.initialize(this, getString(R.string.adAppId) );
 
         // AdMobの初期化
         //MobileAds.initialize(this, "ca-app-pub-7517861216605994~5209715764");
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
+//
 //        AdView adView = new AdView(this);
 //        adView.setAdSize(AdSize.BANNER);
 //        adView.setAdUnitId(getString(R.string.adUnitId));
@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         mResultText = (TextView) findViewById(R.id.result);
         mGuideText = (TextView) findViewById(R.id.guide_textView);
         mChallengeButton = (Button) findViewById(R.id.challenge_button);
-
 
 
         mResultText.setVisibility(View.INVISIBLE);
@@ -73,37 +72,36 @@ public class MainActivity extends AppCompatActivity {
                     mTimer.schedule(new TimerTask() {
                         @Override
                         public void run() {
+
+
                             mTimerSec += 0.1;
 
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
+                                    // 上限は３０秒に設定
+                                    if (mTimerSec > 30.0) {
+                                        mTimer.cancel();
+                                        mTimer = null;
+                                        mTimerText.setText(String.format("%.1f", mTimerSec));
+                                        setRestart();
+                                    }
 
                                 }
                             });
                         }
                     }, 100, 100);
-                }else{
+                } else {
                     // ストップが押された時
                     mTimer.cancel();
                     mTimer = null;
-                    mTimerText.setText(String.format("%.1f",mTimerSec));
-
-                    // 10秒ちょうどだったらおめでとう
-                    if( String.format("%.1f",mTimerSec).equals("10.0")){
-                        mResultText.setText("すごい！　おめでとう！");
-                    }else{
-                        mResultText.setText("ざんねん...");
-
-                    }
-                    mResultText.setVisibility(View.VISIBLE);
-
-                    mGuideText.setText("心の中で１０秒数えてね");
-                    mChallengeButton.setText("スタート！");
+                    mTimerText.setText(String.format("%.1f", mTimerSec));
+                    setRestart();
 
                 }
             }
         });
+
 
 //        AdView adView = findViewById(R.id.adView);
 //
@@ -135,5 +133,19 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 
+    }
+
+    private void setRestart() {
+        // 10秒ちょうどだったらおめでとう
+        if (String.format("%.1f", mTimerSec).equals("10.0")) {
+            mResultText.setText("すごい！　おめでとう！");
+        } else {
+            mResultText.setText("ざんねん...");
+
+        }
+        mResultText.setVisibility(View.VISIBLE);
+
+        mGuideText.setText("心の中で１０秒数えてね");
+        mChallengeButton.setText("スタート！");
     }
 }
