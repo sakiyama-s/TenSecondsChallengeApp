@@ -3,6 +3,7 @@ package shohei.sakiyama.tensecondschallengeapp;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -41,15 +42,16 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-7517861216605994/8603548759");
-        adView.setVisibility(View.VISIBLE);
+        //AdView adView = findViewById(R.id.adView);
+        //mAdView.setAdSize(AdSize.BANNER);
+        //mAdView.setAdUnitId("ca-app-pub-7517861216605994/8603548759");
+        //mAdView.setVisibility(View.VISIBLE);
 
         mTimerText = (TextView) findViewById(R.id.timer);
         mResultText = (TextView) findViewById(R.id.result);
         mGuideText = (TextView) findViewById(R.id.guide_textView);
         mChallengeButton = (Button) findViewById(R.id.challenge_button);
+
 
 
         mResultText.setVisibility(View.INVISIBLE);
@@ -85,16 +87,9 @@ public class MainActivity extends AppCompatActivity {
                     mTimer = null;
                     mTimerText.setText(String.format("%.1f",mTimerSec));
 
-
-
-
-
                     // 10秒ちょうどだったらおめでとう
                     if( String.format("%.1f",mTimerSec).equals("10.0")){
                         mResultText.setText("すごい！　おめでとう！");
-
-
-
                     }else{
                         mResultText.setText("ざんねん...");
 
@@ -108,34 +103,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        mAdView.setAdListener(new AdListener(){
-//            @Override
-//            public void onAdLoaded() {
-//                // Code to be executed when an ad finishes loading.
-//            }
-//
-//            @Override
-//            public void onAdFailedToLoad(int errorCode) {
-//                // Code to be executed when an ad request fails.
-//            }
-//
-//            @Override
-//            public void onAdOpened() {
-//                // Code to be executed when an ad opens an overlay that
-//                // covers the screen.
-//            }
-//
-//            @Override
-//            public void onAdLeftApplication() {
-//                // Code to be executed when the user has left the app.
-//            }
-//
-//            @Override
-//            public void onAdClosed() {
-//                // Code to be executed when when the user is about to return
-//                // to the app after tapping on an ad.
-//            }
-//        });
+        AdView adView = findViewById(R.id.adView);
+
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                Log.d("Debug", "onAdLoaded()");
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Log.d("Debug", "onAdFailedToLoad() errorCode=" + errorCode);
+            }
+
+            @Override
+            public void onAdOpened() {
+                Log.d("Debug", "onAdOpened()");
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                Log.d("Debug", "onAdLeftApplication()");
+            }
+
+            @Override
+            public void onAdClosed() {
+                Log.d("Debug", "onAdClosed()");
+            }
+        });
 
 
     }
