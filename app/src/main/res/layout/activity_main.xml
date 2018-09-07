@@ -19,7 +19,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         android:text="0.0"
         android:textColor="@color/colorAccent"
         android:textSize="60sp" />
@@ -31,9 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/timer"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+
+        android:layout_marginTop="5dp"
         android:textSize="30sp" />
 
 
@@ -43,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/result"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:width="200sp"
         android:height="100sp"
         android:background="@color/colorAccent"
@@ -58,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/challenge_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:gravity="center_horizontal"
         android:text="心の中で１０秒数えてね" />
 

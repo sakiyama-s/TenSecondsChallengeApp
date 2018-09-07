@@ -36,18 +36,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //MobileAds.initialize(this, getString(R.string.adAppId) );
 
         // AdMobの初期化
-        //MobileAds.initialize(this, "ca-app-pub-7517861216605994~5209715764");
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-//
-//        AdView adView = new AdView(this);
-//        adView.setAdSize(AdSize.BANNER);
-//        adView.setAdUnitId(getString(R.string.adUnitId));
 
 
         mTimerText = (TextView) findViewById(R.id.timer);
@@ -67,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     mTimerSec = 0.0;
                     mChallengeButton.setText("ストップ！");
                     mResultText.setVisibility(View.INVISIBLE);
-                    mTimerText.setText("計測中...");
+                    //mTimerText.setText("計測中...");
                     mGuideText.setText("１０秒経ったと思ったらストップ！");
                     mTimer = new Timer();
                     mTimer.schedule(new TimerTask() {
@@ -86,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
                                         mTimer = null;
                                         mTimerText.setText(String.format("%.1f", mTimerSec));
                                         setRestart();
+                                    }else if(mTimerSec < 0.8){
+                                        // 0.8秒までは秒数を表示
+                                        mTimerText.setText(String.format("%.1f", mTimerSec));
+                                    }else{
+                                        mTimerText.setText("計測中...");
                                     }
 
                                 }
@@ -138,9 +137,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setRestart() {
         // 10秒ちょうどだったらおめでとう
-        if (String.format("%.1f", mTimerSec).equals("10.0")) {
-            mResultText.setText("すごい！　おめでとう！");
-        } else {
+        if (mTimerSec == 10.0) {
+            mResultText.setText("すごい！");
+        } else if (9.5 <= mTimerSec && mTimerSec <= 10.5 && mTimerSec!=10.0){
+            mResultText.setText("おしい！");
+        }else{
             mResultText.setText("ざんねん...");
 
         }
